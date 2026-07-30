@@ -1,452 +1,400 @@
-<title>Poker Edge — Your Pocket Poker Coach</title>
+<title>Poker Edge — Your Pocket GTO Coach | iOS App</title>
 <style>
-/* ── Tokens ─────────────────────────────────────────────────────────────── */
-:root {
-  --bg:          #0b1a10;
-  --surface:     #111f16;
-  --surface-hi:  #182d1e;
-  --border:      rgba(46,204,113,.13);
-  --border-hi:   rgba(46,204,113,.26);
-  --green:       #2ecc71;
-  --green-glow:  rgba(46,204,113,.18);
-  --green-dim:   rgba(46,204,113,.08);
-  --blue:        #52adf0;
-  --blue-dim:    rgba(82,173,240,.1);
-  --gold:        #f0b030;
-  --gold-dim:    rgba(240,176,48,.12);
-  --text:        #dff0e6;
-  --text-muted:  #6b9478;
-  --text-dim:    #3a5244;
-  --card-bg:     #fafaf7;
+:root{
+  --bg:#0b1a10;--surface:#111f16;--surface-hi:#182d1e;
+  --border:rgba(46,204,113,.13);--border-hi:rgba(46,204,113,.26);
+  --green:#2ecc71;--green-dim:rgba(46,204,113,.08);
+  --blue:#52adf0;--blue-dim:rgba(82,173,240,.1);
+  --gold:#f0b030;--gold-dim:rgba(240,176,48,.12);
+  --text:#dff0e6;--text-muted:#6b9478;--text-dim:#3a5244;
 }
-
-/* ── Reset ───────────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg);
-  color:var(--text);
+  background:var(--bg);color:var(--text);
   font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
-  font-size:16px;line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-  /* Subtle felt grain */
+  font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;
   background-image:
-    radial-gradient(ellipse 80% 60% at 65% 0%, rgba(46,204,113,.06) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(46,204,113,.04) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 65% 0%,rgba(46,204,113,.06) 0%,transparent 70%),
+    radial-gradient(ellipse 60% 40% at 0% 80%,rgba(46,204,113,.04) 0%,transparent 60%);
 }
 a{color:inherit;text-decoration:none}
-img{max-width:100%}
 
-/* ── Nav ─────────────────────────────────────────────────────────────────── */
-nav{
-  position:sticky;top:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(1.25rem,4vw,4rem);height:62px;
-  background:rgba(11,26,16,.9);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-}
-.nav-brand{
-  display:flex;align-items:center;gap:9px;
-  font-size:.98rem;font-weight:900;letter-spacing:-.01em;
-}
-.nav-suit{
-  width:30px;height:30px;background:var(--green-dim);
-  border:1px solid var(--border-hi);border-radius:7px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;color:var(--green);
-}
-.nav-links{
-  display:flex;align-items:center;gap:2.25rem;
-  font-size:.83rem;font-weight:600;color:var(--text-muted);
-}
-.nav-links a{transition:color .15s}
-.nav-links a:hover{color:var(--text)}
-.nav-dl{
-  background:var(--green);color:#042208;
-  padding:.42rem 1.05rem;border-radius:6px;
-  font-size:.82rem;font-weight:800;letter-spacing:.01em;
-  transition:opacity .15s;
-}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.25rem,4vw,4rem);height:62px;background:rgba(11,26,16,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:.98rem;font-weight:900;letter-spacing:-.01em}
+.nav-suit{width:30px;height:30px;background:var(--green-dim);border:1px solid var(--border-hi);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--green)}
+.nav-links{display:flex;align-items:center;gap:2.25rem;font-size:.83rem;font-weight:600;color:var(--text-muted)}
+.nav-links a{transition:color .15s}.nav-links a:hover{color:var(--text)}
+.nav-dl{background:var(--green);color:#042208;padding:.42rem 1.05rem;border-radius:6px;font-size:.82rem;font-weight:800;letter-spacing:.01em;transition:opacity .15s}
 .nav-dl:hover{opacity:.87}
 
-/* ── Hero ────────────────────────────────────────────────────────────────── */
-.hero{
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;gap:clamp(2.5rem,5vw,5rem);
-  max-width:1160px;margin:0 auto;
-  padding:clamp(4rem,9vw,8rem) clamp(1.25rem,4vw,4rem);
-}
-.hero-eyebrow{
-  display:inline-block;
-  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--green);margin-bottom:1.1rem;
-}
-.hero h1{
-  font-size:clamp(2.8rem,5.5vw,5rem);
-  font-weight:900;line-height:1.01;letter-spacing:-.035em;
-  text-wrap:balance;margin-bottom:1.1rem;
-}
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(2.5rem,5vw,5rem);max-width:1160px;margin:0 auto;padding:clamp(4rem,9vw,8rem) clamp(1.25rem,4vw,4rem)}
+.hero-eyebrow{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:1.1rem}
+.hero h1{font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1.01;letter-spacing:-.035em;text-wrap:balance;margin-bottom:1.1rem}
 .hero h1 .accent{color:var(--green)}
-.hero-sub{
-  font-size:clamp(.95rem,1.4vw,1.1rem);color:var(--text-muted);
-  line-height:1.65;max-width:42ch;margin-bottom:2rem;
-}
+.hero-price-pill{display:inline-flex;align-items:center;gap:.45rem;background:var(--gold-dim);border:1px solid rgba(240,176,48,.25);border-radius:20px;padding:.3rem .85rem;margin-bottom:1rem;font-size:.73rem;font-weight:700;color:var(--gold);letter-spacing:.03em}
+.hero-sub{font-size:clamp(.95rem,1.4vw,1.1rem);color:var(--text-muted);line-height:1.65;max-width:44ch;margin-bottom:2rem}
 .hero-btns{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:.45rem;
-  background:var(--green);color:#042208;
-  padding:.78rem 1.5rem;border-radius:8px;
-  font-weight:800;font-size:.92rem;letter-spacing:.01em;
-  transition:transform .15s,opacity .15s;
-}
+.btn-primary{display:inline-flex;align-items:center;gap:.45rem;background:var(--green);color:#042208;padding:.78rem 1.5rem;border-radius:8px;font-weight:800;font-size:.92rem;letter-spacing:.01em;transition:transform .15s,opacity .15s}
 .btn-primary:hover{transform:translateY(-1px);opacity:.9}
-.btn-ghost{
-  color:var(--text-muted);font-size:.88rem;font-weight:600;
-  transition:color .15s;
-}
+.btn-ghost{color:var(--text-muted);font-size:.88rem;font-weight:600;transition:color .15s}
 .btn-ghost:hover{color:var(--text)}
 .hero-trust{font-size:.74rem;color:var(--text-dim);letter-spacing:.02em}
+.hero-visual{display:flex;flex-direction:column;align-items:center;gap:1.5rem}
 
-/* ── Hero visual ─────────────────────────────────────────────────────────── */
-.hero-visual{
-  display:flex;flex-direction:column;align-items:center;
-  gap:1.75rem;
-}
+/* RANGE CHART */
+.rc-wrap{display:flex;flex-direction:column;align-items:center;gap:.7rem;filter:drop-shadow(0 16px 40px rgba(0,0,0,.5))}
+.rc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);font-family:ui-monospace,'SF Mono',monospace}
+.rc-grid{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;border-radius:8px;overflow:hidden;width:100%;max-width:300px}
+.rc-cell{aspect-ratio:1;border-radius:1px}
+.rc-legend{display:flex;gap:1.1rem;justify-content:center}
+.rc-li{display:flex;align-items:center;gap:.35rem;font-size:.65rem;color:var(--text-muted);font-weight:600}
+.rc-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 
-/* Cards */
-.cards-wrap{
-  position:relative;
-  display:flex;justify-content:center;
-  height:160px;
-  filter:drop-shadow(0 20px 48px rgba(0,0,0,.55));
-}
-.pcard{
-  width:100px;height:148px;
-  background:var(--card-bg);
-  border-radius:11px;
-  display:flex;flex-direction:column;
-  justify-content:space-between;
-  padding:9px 11px;
-  position:absolute;
-  font-family:Georgia,serif;
-}
-.pcard-a{
-  left:calc(50% - 70px);
-  transform:rotate(-7deg);
-  box-shadow:0 4px 16px rgba(0,0,0,.4),-2px 0 8px rgba(0,0,0,.2);
-}
-.pcard-k{
-  left:calc(50% - 38px);
-  transform:rotate(4deg);
-  box-shadow:0 8px 28px rgba(0,0,0,.5);
-  z-index:1;
-}
-.cr{font-size:1.45rem;font-weight:700;line-height:1}
-.cs{font-size:1.15rem;line-height:1}
-.cc{font-size:3rem;text-align:center;line-height:1;flex:1;display:flex;align-items:center;justify-content:center}
-.cblack{color:#0f0f0f}
-.cred{color:#c0392b}
-.cbot{transform:rotate(180deg);align-self:flex-end}
+/* HERO MINI-DASHBOARD */
+.hv-cards{display:flex;gap:.75rem;width:100%;max-width:300px}
+.hv-card{flex:1;background:var(--surface-hi);border:1px solid var(--border);border-radius:10px;padding:.85rem;display:flex;flex-direction:column;gap:.25rem}
+.hvc-label{font-size:.56rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:ui-monospace,'SF Mono',monospace;margin-bottom:.1rem}
+.hvc-action{font-size:.95rem;font-weight:900;color:var(--green)}
+.hvc-detail{font-size:.64rem;color:var(--text-muted);line-height:1.4}
+.hvc-bars{display:flex;height:4px;border-radius:99px;overflow:hidden;gap:1px;margin:.35rem 0 .15rem}
+.hvc-bar{height:4px}
+.hvc-bar-label{font-size:.56rem;color:var(--text-dim);font-family:ui-monospace,'SF Mono',monospace;line-height:1.5}
+.hvc-score{font-size:1.85rem;font-weight:900;color:var(--green);line-height:1;letter-spacing:-.03em}
+.hvc-score span{font-size:.85rem;font-weight:600}
+.hvc-sub{font-size:.62rem;color:var(--text-dim);margin-bottom:.2rem}
+.hvc-dot-row{display:flex;align-items:center;gap:.35rem}
+.hvc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;display:inline-block}
+.hvc-dt{font-size:.65rem;color:var(--text-muted)}
+/* LEAK FINDER */
+.hv-leak{width:100%;max-width:300px;background:rgba(230,126,34,.07);border:1px solid rgba(230,126,34,.22);border-left:3px solid #e67e22;border-radius:10px;padding:.85rem 1rem}
+.hv-leak-head{display:flex;align-items:center;gap:.45rem;margin-bottom:.3rem}
+.hv-leak-icon{color:#e67e22;font-size:.8rem;font-weight:900;line-height:1}
+.hv-leak-title{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#e67e22;font-family:ui-monospace,'SF Mono',monospace}
+.hv-leak-body{font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.hv-leak-stat{font-size:.68rem;color:var(--text-muted)}
 
-/* Advice output */
-.advice-out{
-  width:100%;max-width:310px;
-  background:var(--surface-hi);
-  border:1px solid var(--border-hi);
-  border-left:3px solid var(--green);
-  border-radius:11px;
-  padding:1.1rem 1.2rem;
-}
-.ao-label{
-  font-size:.64rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--text-muted);margin-bottom:.5rem;
-  font-family:ui-monospace,'SF Mono','Fira Code',monospace;
-}
-.ao-action{
-  font-size:1.15rem;font-weight:900;letter-spacing:-.01em;
-  color:var(--green);margin-bottom:.2rem;
-}
-.ao-note{font-size:.8rem;color:var(--text-muted);margin-bottom:.85rem;line-height:1.5}
-.ao-bars{display:flex;gap:4px;align-items:center}
-.ao-bar{height:5px;border-radius:99px}
-.ao-bar-label{
-  font-size:.62rem;color:var(--text-dim);margin-top:.45rem;
-  font-family:ui-monospace,'SF Mono','Fira Code',monospace;
-  letter-spacing:.05em;
-}
+/* PROOF BAR */
+.proof-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem clamp(1.25rem,4vw,4rem)}
+.proof-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:clamp(1rem,3vw,3rem);flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:600;color:var(--text-muted)}
+.proof-stars{color:var(--gold);letter-spacing:1px}
+.proof-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
 
-/* ── Stats strip ─────────────────────────────────────────────────────────── */
-.stats-strip{
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:1.75rem clamp(1.25rem,4vw,4rem);
-}
-.stats-inner{
-  max-width:1160px;margin:0 auto;
-  display:flex;justify-content:center;
-  gap:clamp(2rem,6vw,6rem);flex-wrap:wrap;
-}
+/* STATS */
+.stats-strip{padding:1.75rem clamp(1.25rem,4vw,4rem)}
+.stats-inner{max-width:1160px;margin:0 auto;display:flex;justify-content:center;gap:clamp(2rem,6vw,6rem);flex-wrap:wrap}
 .stat{text-align:center}
-.stat-n{
-  display:block;font-size:2.2rem;font-weight:900;
-  letter-spacing:-.04em;color:var(--green);
-  font-variant-numeric:tabular-nums;line-height:1;
-  margin-bottom:.3rem;
-}
-.stat-l{
-  font-size:.7rem;font-weight:700;letter-spacing:.11em;
-  text-transform:uppercase;color:var(--text-muted);
-}
+.stat-n{display:block;font-size:2.2rem;font-weight:900;letter-spacing:-.04em;color:var(--green);font-variant-numeric:tabular-nums;line-height:1;margin-bottom:.3rem}
+.stat-l{font-size:.7rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--text-muted)}
 
-/* ── Generic section ─────────────────────────────────────────────────────── */
+/* SECTIONS */
 .section{padding:clamp(3.5rem,7vw,6.5rem) clamp(1.25rem,4vw,4rem)}
 .si{max-width:1160px;margin:0 auto}
-.eyebrow{
-  display:block;font-size:.7rem;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--green);margin-bottom:.7rem;
-}
-.section-h{
-  font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:900;
-  letter-spacing:-.025em;text-wrap:balance;margin-bottom:.7rem;
-}
-.section-p{
-  font-size:.98rem;color:var(--text-muted);
-  max-width:50ch;line-height:1.65;margin-bottom:3rem;
+.eyebrow{display:block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.7rem}
+.section-h{font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:900;letter-spacing:-.025em;text-wrap:balance;margin-bottom:.7rem}
+.section-p{font-size:.98rem;color:var(--text-muted);max-width:52ch;line-height:1.65;margin-bottom:3rem}
+
+/* SCREENSHOTS — real app images */
+.screenshots-section{padding:clamp(3rem,6vw,5rem) clamp(1.25rem,4vw,4rem);background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.screenshots-header{text-align:center;margin-bottom:3rem}
+.phones-row{display:flex;justify-content:center;align-items:flex-end;gap:clamp(1.25rem,3vw,3rem);flex-wrap:wrap}
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:.85rem;flex:1;min-width:160px;max-width:220px}
+.phone-caption{font-size:.72rem;font-weight:700;color:var(--text-muted);text-align:center;letter-spacing:.1em;text-transform:uppercase}
+.phone-screenshot{
+  width:200px;
+  height:auto;
+  display:block;
+  border-radius:34px;
+  border:2px solid rgba(255,255,255,.1);
+  box-shadow:0 28px 64px rgba(0,0,0,.65),0 4px 16px rgba(0,0,0,.4);
 }
 
-/* ── Feature grid ────────────────────────────────────────────────────────── */
-.feat-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1.5px;
-  background:var(--border);
-  border:1.5px solid var(--border);
-  border-radius:14px;overflow:hidden;
-}
-.feat-card{
-  background:var(--bg);
-  padding:2rem 1.75rem;
-  transition:background .2s;
-}
+/* AT THE TABLE */
+.at-table-section{padding:clamp(3.5rem,7vw,6rem) clamp(1.25rem,4vw,4rem)}
+.at-table-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
+.at-points{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.75rem}
+.at-point{display:flex;gap:.85rem;align-items:flex-start}
+.at-icon{width:38px;height:38px;flex-shrink:0;background:var(--green-dim);border:1px solid var(--border-hi);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.at-text strong{display:block;font-size:.92rem;font-weight:700;margin-bottom:.1rem}
+.at-text span{font-size:.8rem;color:var(--text-muted)}
+.at-steps{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem}
+.at-step{display:flex;gap:.9rem;align-items:center}
+.at-step-n{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:var(--green);color:#042208;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900}
+.at-step-t{font-size:.85rem;color:var(--text-muted);line-height:1.5}
+.at-step-t strong{color:var(--text);font-weight:700}
+.at-divider{height:1px;background:var(--border)}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5px;background:var(--border);border:1.5px solid var(--border);border-radius:14px;overflow:hidden}
+.feat-card{background:var(--bg);padding:2rem 1.75rem;transition:background .2s}
 .feat-card:hover{background:var(--green-dim)}
 .feat-icon{font-size:1.5rem;margin-bottom:.9rem}
-.feat-tag{
-  display:inline-block;
-  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  background:var(--green-dim);color:var(--green);
-  border:1px solid rgba(46,204,113,.2);
-  border-radius:4px;padding:2px 7px;margin-bottom:.7rem;
-}
-.feat-tag-blue{
-  background:var(--blue-dim);color:var(--blue);
-  border-color:rgba(82,173,240,.2);
-}
-.feat-title{
-  font-size:1.1rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.45rem;
-}
+.feat-tag{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--green-dim);color:var(--green);border:1px solid rgba(46,204,113,.2);border-radius:4px;padding:2px 7px;margin-bottom:.7rem}
+.feat-tag-blue{background:var(--blue-dim);color:var(--blue);border-color:rgba(82,173,240,.2)}
+.feat-title{font-size:1.1rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.45rem}
 .feat-body{font-size:.85rem;color:var(--text-muted);line-height:1.65}
 
-/* ── Pro section ─────────────────────────────────────────────────────────── */
-.pro-bg{background:var(--surface)}
-.pro-layout{
-  display:grid;grid-template-columns:1fr 420px;
-  gap:clamp(2.5rem,5vw,5rem);align-items:start;
-}
+/* CTA STRIP */
+.cta-strip{text-align:center;padding:2rem clamp(1.25rem,4vw,4rem) 3rem}
+.cta-strip p{font-size:.83rem;color:var(--text-dim);margin-top:.7rem}
+
+/* COMPARE */
+.compare-section{padding:clamp(3.5rem,7vw,6.5rem) clamp(1.25rem,4vw,4rem);background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.compare-wrap{overflow-x:auto;margin-top:2.5rem;border-radius:12px;border:1px solid var(--border);overflow:hidden}
+table.ct{width:100%;border-collapse:collapse;min-width:400px}
+table.ct th{padding:.85rem 1.25rem;font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border);text-align:left;background:var(--bg)}
+table.ct th.us{color:var(--green);border-bottom:2px solid var(--green)}
+table.ct td{padding:.8rem 1.25rem;font-size:.87rem;border-bottom:1px solid var(--border);color:var(--text-muted)}
+table.ct tr:last-child td{border-bottom:none}
+table.ct td.us{color:var(--text);font-weight:700;background:rgba(46,204,113,.04);border-left:2px solid var(--green);border-right:2px solid var(--green)}
+table.ct tr:last-child td.us{border-bottom:2px solid var(--green)}
+table.ct td.rl{color:var(--text);font-weight:600;font-size:.85rem;background:var(--bg)}
+.tick{color:var(--green);font-weight:900}.cross{color:var(--text-dim)}
+.compare-note{font-size:.7rem;color:var(--text-dim);margin-top:.85rem}
+
+/* PRO */
+.pro-layout{display:grid;grid-template-columns:1fr 420px;gap:clamp(2.5rem,5vw,5rem);align-items:start}
 .pro-list{display:flex;flex-direction:column;gap:1.1rem;margin-top:1.75rem}
 .pro-item{display:flex;gap:.9rem;align-items:flex-start}
-.pro-tick{
-  width:22px;height:22px;flex-shrink:0;margin-top:1px;
-  background:var(--green-dim);
-  border:1px solid rgba(46,204,113,.3);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.68rem;color:var(--green);font-weight:900;
-}
+.pro-tick{width:22px;height:22px;flex-shrink:0;margin-top:1px;background:var(--green-dim);border:1px solid rgba(46,204,113,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:var(--green);font-weight:900}
 .pro-text strong{display:block;font-size:.93rem;font-weight:700;margin-bottom:.12rem}
 .pro-text span{font-size:.8rem;color:var(--text-muted)}
-
-/* Pricing card */
-.price-card{
-  background:var(--bg);
-  border:1.5px solid var(--border-hi);
-  border-radius:16px;padding:1.9rem;
-  position:sticky;top:78px;
-}
-.price-badge{
-  display:inline-block;
-  background:linear-gradient(135deg,var(--gold) 0%,#d4920a 100%);
-  color:#2a1500;font-size:.65rem;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;
-  padding:3px 10px;border-radius:4px;margin-bottom:1.25rem;
-}
-.price-main{
-  font-size:3rem;font-weight:900;letter-spacing:-.045em;
-  line-height:1;margin-bottom:.2rem;
-  font-variant-numeric:tabular-nums;
-}
-.price-main sub{
-  font-size:1rem;font-weight:500;color:var(--text-muted);
-  letter-spacing:0;vertical-align:baseline;
-}
-.price-note{font-size:.77rem;color:var(--text-muted);margin-bottom:1.4rem}
+.price-card{background:var(--surface-hi);border:1.5px solid var(--border-hi);border-radius:16px;padding:1.9rem;position:sticky;top:78px}
+.price-badge{display:inline-block;background:linear-gradient(135deg,var(--gold) 0%,#d4920a 100%);color:#2a1500;font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:1.25rem}
+.price-main{font-size:3rem;font-weight:900;letter-spacing:-.045em;line-height:1;margin-bottom:.2rem;font-variant-numeric:tabular-nums}
+.price-main sub{font-size:1rem;font-weight:500;color:var(--text-muted);letter-spacing:0;vertical-align:baseline}
+.price-note{font-size:.77rem;color:var(--text-muted);margin-bottom:.9rem}
+.price-vs{font-size:.73rem;color:var(--text-dim);background:rgba(46,204,113,.05);border:1px solid var(--border);border-radius:6px;padding:.5rem .75rem;margin-bottom:1.1rem;line-height:1.6}
+.price-vs strong{color:var(--green)}
 .price-hr{height:1px;background:var(--border);margin:1.25rem 0}
-.price-row{
-  display:flex;justify-content:space-between;
-  font-size:.83rem;padding:.28rem 0;
-}
-.price-row .l{color:var(--text-muted)}
-.price-row .v{font-weight:700}
-.price-row .vg{font-weight:700;color:var(--green)}
-.price-cta{
-  display:block;width:100%;text-align:center;
-  background:var(--green);color:#042208;
-  padding:.82rem;border-radius:8px;
-  font-weight:800;font-size:.93rem;
-  margin-top:1.4rem;transition:opacity .15s;
-  border:none;cursor:pointer;
-}
+.price-row{display:flex;justify-content:space-between;font-size:.83rem;padding:.28rem 0}
+.price-row .l{color:var(--text-muted)}.price-row .v{font-weight:700}.price-row .vg{font-weight:700;color:var(--green)}
+.price-cta{display:block;width:100%;text-align:center;background:var(--green);color:#042208;padding:.82rem;border-radius:8px;font-weight:800;font-size:.93rem;margin-top:1.4rem;transition:opacity .15s;border:none;cursor:pointer}
 .price-cta:hover{opacity:.88}
-.price-restore{
-  display:block;text-align:center;
-  font-size:.72rem;color:var(--text-dim);margin-top:.65rem;
-}
+.price-restore{display:block;text-align:center;font-size:.72rem;color:var(--text-dim);margin-top:.65rem}
 
-/* ── FAQ ─────────────────────────────────────────────────────────────────── */
-.faq-wrap{
-  margin-top:2rem;
-  border:1px solid var(--border);
-  border-radius:12px;overflow:hidden;
-}
-.faq-item{
-  padding:1.2rem 1.5rem;
-  border-bottom:1px solid var(--border);
-}
+/* TESTIMONIALS */
+.testi-section{padding:clamp(3.5rem,7vw,6.5rem) clamp(1.25rem,4vw,4rem);border-top:1px solid var(--border)}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2.5rem}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;gap:.85rem;transition:border-color .2s}
+.tcard:hover{border-color:var(--border-hi)}
+.t-stars{color:var(--gold);letter-spacing:2px;font-size:.85rem}
+.t-quote{font-size:.88rem;color:var(--text);line-height:1.7;font-style:italic}
+
+/* FAQ */
+.faq-wrap{margin-top:2rem;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-item{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
 .faq-item:last-child{border-bottom:none}
 .faq-q{font-size:.93rem;font-weight:700;margin-bottom:.4rem}
 .faq-a{font-size:.84rem;color:var(--text-muted);line-height:1.7}
 
-/* ── Footer ──────────────────────────────────────────────────────────────── */
-footer{
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  padding:2.5rem clamp(1.25rem,4vw,4rem);
-}
-.footer-inner{
-  max-width:1160px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:1.5rem;flex-wrap:wrap;
-}
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2.5rem clamp(1.25rem,4vw,4rem)}
+.footer-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
 .footer-brand{font-size:1rem;font-weight:900;letter-spacing:-.01em}
 .footer-note{font-size:.73rem;color:var(--text-dim);margin-top:.3rem}
 .footer-links{display:flex;gap:1.5rem;font-size:.78rem;color:var(--text-muted)}
 .footer-links a:hover{color:var(--text)}
-.appstore-badge{
-  display:inline-flex;align-items:center;gap:.65rem;
-  background:#0f0f0f;
-  border:1.5px solid rgba(255,255,255,.12);
-  border-radius:10px;padding:.55rem 1.1rem;
-  transition:border-color .15s;
-}
+.appstore-badge{display:inline-flex;align-items:center;gap:.65rem;background:#0f0f0f;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:.55rem 1.1rem;transition:border-color .15s}
 .appstore-badge:hover{border-color:rgba(255,255,255,.28)}
 .badge-apple{font-size:1.5rem;line-height:1}
 .badge-top{font-size:.58rem;opacity:.65;display:block;letter-spacing:.03em}
 .badge-main{font-size:.98rem;font-weight:700;display:block;letter-spacing:-.01em}
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
+/* RESPONSIVE */
 @media(max-width:880px){
   .hero{grid-template-columns:1fr;gap:3rem;padding-top:3rem}
   .hero-visual{order:-1}
   .pro-layout{grid-template-columns:1fr}
   .price-card{position:static}
+  .at-table-inner{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .nav-links{display:none}
   .stats-inner{gap:1.75rem 3rem}
+  .proof-divider{display:none}
+  .phone-screenshot{width:165px}
 }
-@media(prefers-reduced-motion:reduce){
-  *{transition:none!important;animation:none!important}
-}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ NAV -->
+<!-- NAV -->
 <nav>
-  <div class="nav-brand">
-    <div class="nav-suit">♠</div>
-    Poker Edge
-  </div>
+  <div class="nav-brand"><div class="nav-suit">♠</div>Poker Edge</div>
   <div class="nav-links">
     <a href="#features">Features</a>
+    <a href="#compare">Compare</a>
     <a href="#pro">Pro</a>
     <a href="#faq">FAQ</a>
   </div>
   <a href="https://apps.apple.com/gb/app/poker-edge/id6761439439" class="nav-dl">Download Free</a>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ HERO -->
+<!-- HERO -->
 <div class="hero">
-  <!-- Left: copy -->
   <div>
     <span class="hero-eyebrow">Poker Edge · iOS</span>
-    <h1>The coach<br>in your <span class="accent">pocket.</span></h1>
-    <p class="hero-sub">
-      Real-time GTO advice at the table. A full practice trainer that scores every decision.
-      A study hub with guides and quizzes. Free to download and use from day one.
-    </p>
+    <h1>Play your best<br>poker. At the<br><span class="accent">table.</span></h1>
+    <div class="hero-price-pill">⚡ Pro from £3.99/month — 8× cheaper than other GTO tools</div>
+    <p class="hero-sub">Real-time GTO advice the moment cards are dealt. A practice trainer that scores every decision. A full study hub. All on your iPhone — no laptop, no setup, free to start.</p>
     <div class="hero-btns">
       <a href="https://apps.apple.com/gb/app/poker-edge/id6761439439" class="btn-primary">↓&nbsp; Download Free on iOS</a>
       <a href="#features" class="btn-ghost">See what's free →</a>
     </div>
-    <div class="hero-trust">No account · Preflop advice always free · iOS 14+</div>
+    <div class="hero-trust">No account · Preflop advice always free · Free to download</div>
   </div>
-
-  <!-- Right: live output demo -->
   <div class="hero-visual">
-    <!-- Hole cards -->
-    <div class="cards-wrap">
-      <!-- Ace of Spades -->
-      <div class="pcard pcard-a">
-        <div><div class="cr cblack">A</div><div class="cs cblack">♠</div></div>
-        <div class="cc cblack">♠</div>
-        <div class="cbot"><div class="cr cblack">A</div><div class="cs cblack">♠</div></div>
-      </div>
-      <!-- King of Hearts -->
-      <div class="pcard pcard-k">
-        <div><div class="cr cred">K</div><div class="cs cred">♥</div></div>
-        <div class="cc cred">♥</div>
-        <div class="cbot"><div class="cr cred">K</div><div class="cs cred">♥</div></div>
+    <!-- GTO Range Chart -->
+    <div class="rc-wrap">
+      <div class="rc-label">BTN Opening Range · 6-Max</div>
+      <div id="rc-grid" class="rc-grid"></div>
+      <div class="rc-legend">
+        <div class="rc-li"><div class="rc-dot" style="background:#2ecc71"></div>Open raise</div>
+        <div class="rc-li"><div class="rc-dot" style="background:rgba(46,204,113,.42)"></div>Mixed</div>
+        <div class="rc-li"><div class="rc-dot" style="background:rgba(255,255,255,.06)"></div>Fold</div>
       </div>
     </div>
-
-    <!-- Advice output -->
-    <div class="advice-out">
-      <div class="ao-label">Live Advisor · BTN · 6-handed · 100BB</div>
-      <div class="ao-action">Raise to 2.5BB</div>
-      <div class="ao-note">Premium hand — open from every position. GTO frequency: raise 100%.</div>
-      <div class="ao-bars">
-        <div class="ao-bar" style="flex:88;background:var(--green)"></div>
-        <div class="ao-bar" style="flex:7;background:rgba(255,255,255,.1)"></div>
-        <div class="ao-bar" style="flex:5;background:rgba(255,255,255,.06)"></div>
+    <!-- Two mini cards -->
+    <div class="hv-cards">
+      <div class="hv-card">
+        <div class="hvc-label">Live Advisor · Flop</div>
+        <div class="hvc-action">🔥 Bet/Raise</div>
+        <div class="hvc-detail">Win% 94.0% · Trips (As)<br>Bet 60–75% pot for value</div>
+        <div class="hvc-bars">
+          <div class="hvc-bar" style="flex:82;background:var(--green)"></div>
+          <div class="hvc-bar" style="flex:10;background:#52adf0;opacity:.7"></div>
+          <div class="hvc-bar" style="flex:8;background:rgba(255,255,255,.07)"></div>
+        </div>
+        <div class="hvc-bar-label">Raise 82%<br>Bet 10% · Check 8%</div>
       </div>
-      <div class="ao-bar-label">Raise 88% · Call 7% · Fold 5%</div>
+      <div class="hv-card">
+        <div class="hvc-label">Session Score</div>
+        <div class="hvc-score">77<span>%</span></div>
+        <div class="hvc-sub">44 hands · 90 moves</div>
+        <div class="hvc-dot-row"><span class="hvc-dot" style="background:#2ecc71"></span><span class="hvc-dt">Good · 70</span></div>
+        <div class="hvc-dot-row"><span class="hvc-dot" style="background:#e67e22"></span><span class="hvc-dt">Inaccuracy · 2</span></div>
+        <div class="hvc-dot-row"><span class="hvc-dot" style="background:#e74c3c"></span><span class="hvc-dt">Blunder · 18</span></div>
+      </div>
+    </div>
+    <!-- Leak Finder -->
+    <div class="hv-leak">
+      <div class="hv-leak-head">
+        <span class="hv-leak-icon">▲</span>
+        <span class="hv-leak-title">Leak Finder</span>
+      </div>
+      <div class="hv-leak-body">Playing too many hands pre-flop</div>
+      <div class="hv-leak-stat">EV impact: −0.59 BB/hand · 26.0 BB lost this session</div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════════ STATS -->
+<script>
+(function(){
+  var r=[
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1,.5,.5,.5, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1,.5, 0, 0, 0, 0, 0, 0,
+    1, 1, 1, 1, 1, 1,.5, 0, 0, 0, 0, 0, 0,
+    1,.5,.5,.5, 1, 1,.5, 0, 0, 0, 0, 0, 0,
+   .5, 0, 0,.5,.5, 1, 1,.5, 0, 0, 0, 0, 0,
+   .5, 0, 0, 0, 0, 0, 1, 1,.5, 0, 0, 0, 0,
+   .5, 0, 0, 0, 0, 0, 0, 1,.5,.5, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,.5,.5, 0, 0, 0,
+   .5, 0, 0, 0, 0, 0, 0, 0, 0,.5,.5, 0, 0,
+   .5, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5
+  ];
+  var g=document.getElementById('rc-grid');
+  r.forEach(function(v){
+    var c=document.createElement('div');
+    c.className='rc-cell';
+    c.style.background=v===1?'#2ecc71':v===.5?'rgba(46,204,113,.42)':'rgba(255,255,255,.05)';
+    g.appendChild(c);
+  });
+})();
+</script>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-inner">
+    <div class="proof-item"><span class="proof-stars">★★★★★</span> App Store rated</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">🆓 Free to download</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">📱 Use at the table</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">🔒 No account needed</div>
+  </div>
+</div>
+
+<!-- STATS -->
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat"><span class="stat-n">10</span><span class="stat-l">Free practice hands / day</span></div>
-    <div class="stat"><span class="stat-n">10</span><span class="stat-l">Free postflop trials</span></div>
+    <div class="stat"><span class="stat-n">10</span><span class="stat-l">Free postflop trials in Live Advisor</span></div>
     <div class="stat"><span class="stat-n">5</span><span class="stat-l">In-depth study topics</span></div>
-    <div class="stat"><span class="stat-n">15</span><span class="stat-l">Quiz questions per session</span></div>
+    <div class="stat"><span class="stat-n">£3.99</span><span class="stat-l">Pro per month</span></div>
   </div>
 </div>
 
-<!-- ═════════════════════════════════════════════════════════════ FEATURES -->
-<section class="section" id="features">
+<!-- SCREENSHOTS — real app images -->
+<div class="screenshots-section">
+  <div class="si">
+    <div class="screenshots-header">
+      <span class="eyebrow">See it in action</span>
+      <h2 class="section-h">Everything you need.<br>Always in your pocket.</h2>
+    </div>
+    <div class="phones-row">
+      <div class="phone-wrap">
+        <img src="live-advisor.png" alt="Live Advisor — real-time GTO advice" class="phone-screenshot">
+        <div class="phone-caption">Live Advisor</div>
+      </div>
+      <div class="phone-wrap">
+        <img src="practice.png" alt="Practice Trainer — AI opponents" class="phone-screenshot">
+        <div class="phone-caption">Practice Trainer</div>
+      </div>
+      <div class="phone-wrap">
+        <img src="review.png" alt="Session Review — decision stats" class="phone-screenshot">
+        <div class="phone-caption">Session Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AT THE TABLE -->
+<div class="at-table-section">
+  <div class="at-table-inner">
+    <div>
+      <span class="eyebrow">Built for the table</span>
+      <h2 class="section-h">The only GTO tool<br>designed to use<br><span style="color:var(--green)">mid-session.</span></h2>
+      <p class="section-p" style="margin-bottom:0">Other GTO tools are built for the study room — desktop apps that take minutes to load a spot. Poker Edge is built for the moment you need it.</p>
+      <div class="at-points">
+        <div class="at-point"><div class="at-icon">📱</div><div class="at-text"><strong>Always in your pocket</strong><span>iPhone app — no laptop, no browser, no setup required</span></div></div>
+        <div class="at-point"><div class="at-icon">⚡</div><div class="at-text"><strong>Instant advice</strong><span>Tap your cards and position. Advice appears in under a second</span></div></div>
+        <div class="at-point"><div class="at-icon">🃏</div><div class="at-text"><strong>Follows the hand</strong><span>Add board cards street by street — advice updates live as the hand develops</span></div></div>
+        <div class="at-point"><div class="at-icon">🔇</div><div class="at-text"><strong>Discreet and fast</strong><span>Clean dark interface designed to use quickly between hands</span></div></div>
+      </div>
+    </div>
+    <div class="at-steps">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.25rem">How it works at the table</div>
+      <div class="at-divider"></div>
+      <div class="at-step"><div class="at-step-n">1</div><div class="at-step-t"><strong>You're dealt hole cards</strong><br>Tap your two cards and position in the Live Advisor</div></div>
+      <div class="at-divider"></div>
+      <div class="at-step"><div class="at-step-n">2</div><div class="at-step-t"><strong>Get instant preflop advice</strong><br>Raise, call or fold — with GTO frequency breakdown</div></div>
+      <div class="at-divider"></div>
+      <div class="at-step"><div class="at-step-n">3</div><div class="at-step-t"><strong>Flop is dealt</strong><br>Add board cards — real-time Win% and postflop recommendation appear instantly</div></div>
+      <div class="at-divider"></div>
+      <div class="at-step"><div class="at-step-n">4</div><div class="at-step-t"><strong>Turn and river</strong><br>Advice updates every street. Board texture, opponent range and plan coaching included</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features" style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="si">
     <span class="eyebrow">What's included</span>
     <h2 class="section-h">Three tools.<br>One sharp game.</h2>
@@ -456,13 +404,13 @@ footer{
         <div class="feat-icon">🃏</div>
         <span class="feat-tag">Always free</span>
         <div class="feat-title">Live Advisor</div>
-        <div class="feat-body">Enter your hole cards, position and table size for instant preflop advice. Add board cards to see real-time Win% and GTO recommendations on every street. 10 free postflop hands included to try the full suite.</div>
+        <div class="feat-body">Enter your hole cards, position and table size for instant preflop advice. Add board cards to see real-time Win% and GTO recommendations on every street. Includes 10 free postflop trials in Live Advisor to try the full experience.</div>
       </div>
       <div class="feat-card">
         <div class="feat-icon">🎯</div>
         <span class="feat-tag feat-tag-blue">10 hands free / day</span>
         <div class="feat-title">Practice Trainer</div>
-        <div class="feat-body">Play full hands against an AI lineup in cash or tournament mode. Every decision is tagged — Optimal, Acceptable, Inaccuracy or Mistake — with a note explaining why. Session stats, EV tracking and hand history included.</div>
+        <div class="feat-body">Play full hands against an AI lineup in cash or tournament mode. Every decision is tagged — Optimal, Acceptable, Inaccuracy or Mistake — with a GTO explanation for each. Session stats, EV tracking, Leak Finder and hand history included.</div>
       </div>
       <div class="feat-card">
         <div class="feat-icon">📚</div>
@@ -474,62 +422,76 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════════ PRO -->
-<section class="section pro-bg" id="pro">
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <a href="https://apps.apple.com/gb/app/poker-edge/id6761439439" class="btn-primary" style="display:inline-flex">↓&nbsp; Download Free on iOS</a>
+  <p>No account required · Preflop advice free forever</p>
+</div>
+
+<!-- COMPARE -->
+<div class="compare-section" id="compare">
+  <div class="si">
+    <span class="eyebrow">How we compare</span>
+    <h2 class="section-h">GTO coaching.<br>Without the<br><span style="color:var(--green)">desktop price tag.</span></h2>
+    <p class="section-p">The same strategic thinking — on your phone, at the table, for a fraction of the cost.</p>
+    <div class="compare-wrap">
+      <table class="ct">
+        <thead>
+          <tr>
+            <th style="width:42%"></th>
+            <th class="us">♠ Poker Edge</th>
+            <th>Other GTO Apps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="rl">Monthly price</td><td class="us">£3.99 / month</td><td>£30–150 / month</td></tr>
+          <tr><td class="rl">Free to start</td><td class="us"><span class="tick">✓</span> Always free tier</td><td>Trial or limited only</td></tr>
+          <tr><td class="rl">Mobile app</td><td class="us"><span class="tick">✓</span> iPhone — built for it</td><td>Desktop-first</td></tr>
+          <tr><td class="rl">Use at the table</td><td class="us"><span class="tick">✓</span> Designed for it</td><td><span class="cross">✗</span> Desktop tool</td></tr>
+          <tr><td class="rl">Real-time advice</td><td class="us"><span class="tick">✓</span> Instant, per hand</td><td><span class="cross">✗</span> Post-session analysis</td></tr>
+          <tr><td class="rl">Practice trainer</td><td class="us"><span class="tick">✓</span> Full AI lineup</td><td><span class="tick">✓</span> Available</td></tr>
+          <tr><td class="rl">Study guides & quiz</td><td class="us"><span class="tick">✓</span> Always free</td><td>Varies by app</td></tr>
+          <tr><td class="rl">No account needed</td><td class="us"><span class="tick">✓</span></td><td><span class="cross">✗</span> Account required</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">Based on published pricing and features of leading GTO tools at time of writing.</p>
+  </div>
+</div>
+
+<!-- PRO -->
+<section class="section" id="pro">
   <div class="si">
     <div class="pro-layout">
-      <!-- Left -->
       <div>
         <span class="eyebrow">Pro</span>
         <h2 class="section-h">Remove every limit.</h2>
         <p class="section-p">One subscription unlocks unlimited practice and the full postflop suite in the Live Advisor.</p>
         <div class="pro-list">
-          <div class="pro-item">
-            <div class="pro-tick">✓</div>
-            <div class="pro-text"><strong>Unlimited Trainer sessions</strong><span>No daily cap — practice as many hands as you like</span></div>
-          </div>
-          <div class="pro-item">
-            <div class="pro-tick">✓</div>
-            <div class="pro-text"><strong>Postflop Win%</strong><span>Real-time equity calculation on the flop, turn and river</span></div>
-          </div>
-          <div class="pro-item">
-            <div class="pro-tick">✓</div>
-            <div class="pro-text"><strong>Street-by-street advice</strong><span>GTO recommendations at every decision point postflop</span></div>
-          </div>
-          <div class="pro-item">
-            <div class="pro-tick">✓</div>
-            <div class="pro-text"><strong>Board texture analysis</strong><span>Spot dangerous and draw-heavy boards before you act</span></div>
-          </div>
-          <div class="pro-item">
-            <div class="pro-tick">✓</div>
-            <div class="pro-text"><strong>Opponent profiling</strong><span>Tag player types at your table and adapt your strategy</span></div>
-          </div>
-          <div class="pro-item">
-            <div class="pro-tick">✓</div>
-            <div class="pro-text"><strong>Street plan coaching</strong><span>Know exactly what to do if called or raised on every street</span></div>
-          </div>
+          <div class="pro-item"><div class="pro-tick">✓</div><div class="pro-text"><strong>Unlimited Trainer sessions</strong><span>No daily cap — practice as many hands as you like</span></div></div>
+          <div class="pro-item"><div class="pro-tick">✓</div><div class="pro-text"><strong>Postflop Win%</strong><span>Real-time equity calculation on the flop, turn and river</span></div></div>
+          <div class="pro-item"><div class="pro-tick">✓</div><div class="pro-text"><strong>Street-by-street advice</strong><span>GTO recommendations at every decision point postflop</span></div></div>
+          <div class="pro-item"><div class="pro-tick">✓</div><div class="pro-text"><strong>Board texture analysis</strong><span>Spot dangerous and draw-heavy boards before you act</span></div></div>
+          <div class="pro-item"><div class="pro-tick">✓</div><div class="pro-text"><strong>Opponent profiling</strong><span>Tag player types at your table and adapt your strategy</span></div></div>
+          <div class="pro-item"><div class="pro-tick">✓</div><div class="pro-text"><strong>Street plan coaching</strong><span>Know exactly what to do if called or raised on every street</span></div></div>
         </div>
       </div>
-
-      <!-- Right: pricing card -->
       <div>
         <div class="price-card">
           <span class="price-badge">Pro</span>
           <div class="price-main">£3.99<sub> / month</sub></div>
           <div class="price-note">Cancel anytime from App Store settings</div>
-
+          <div class="price-vs">Other GTO tools charge <strong>8–40× more</strong> for desktop-only apps. Poker Edge Pro works on your iPhone, at the table, right now.</div>
           <div class="price-hr"></div>
           <div class="price-row"><span class="l">Preflop advice</span><span class="v">Always free</span></div>
-          <div class="price-row"><span class="l">Postflop trials</span><span class="v">10 lifetime</span></div>
+          <div class="price-row"><span class="l">Postflop trials (Live Advisor)</span><span class="v">10 free</span></div>
           <div class="price-row"><span class="l">Practice hands</span><span class="v">10 / day free</span></div>
-
           <div class="price-hr"></div>
           <div class="price-row"><span class="l">Unlimited Trainer</span><span class="vg">Included</span></div>
           <div class="price-row"><span class="l">Full postflop suite</span><span class="vg">Included</span></div>
           <div class="price-row"><span class="l">Opponent profiling</span><span class="vg">Included</span></div>
           <div class="price-row"><span class="l">Street plan coaching</span><span class="vg">Included</span></div>
-
-          <a href="https://apps.apple.com/gb/app/poker-edge/id6761439439" class="price-cta">Subscribe to Pro</a>
+          <a href="https://apps.apple.com/gb/app/poker-edge/id6761439439" class="price-cta">Get Pro — £3.99/month</a>
           <span class="price-restore">Restore previous purchase</span>
         </div>
       </div>
@@ -537,18 +499,40 @@ footer{
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════════════ FAQ -->
-<section class="section" id="faq">
+<!-- TESTIMONIALS -->
+<div class="testi-section">
+  <div class="si">
+    <span class="eyebrow">What players say</span>
+    <h2 class="section-h">Real feedback.<br>Real improvement.</h2>
+    <div class="testi-grid">
+      <div class="tcard">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">"Best poker app I've tried. The hand feedback is brilliant — tells you exactly what GTO suggests and why. At £3.99 a month it's a complete no-brainer compared to the expensive desktop tools."</div>
+      </div>
+      <div class="tcard">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">"The practice trainer is genuinely addictive. Playing against the AI lineup and getting every decision scored has improved my preflop game massively in just a few weeks of casual use."</div>
+      </div>
+      <div class="tcard">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">"Love being able to use it at the table. Super fast to get advice between hands. The Leak Finder is a great touch — showed me I was calling too wide from the blinds which I'd never have spotted myself."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="section" style="border-top:1px solid var(--border)" id="faq">
   <div class="si">
     <span class="eyebrow">FAQ</span>
     <h2 class="section-h">Common questions.</h2>
     <div class="faq-wrap">
       <div class="faq-item">
-        <div class="faq-q">Is it really free?</div>
-        <div class="faq-a">Yes. Preflop advice is free forever — no account, no sign-up. You also get 10 free postflop hands (lifetime) in the Live Advisor and 10 free practice hands per day in the Trainer. The Study Hub — guides, quiz, glossary — is always free with no limit.</div>
+        <div class="faq-q">How does it compare to other GTO tools?</div>
+        <div class="faq-a">Most GTO tools start at £30+/month and are built for desktop post-session study. Poker Edge is built for your iPhone and designed to use at the table in real time. At £3.99/month Pro, it's a fraction of the cost and the only option you can actually use mid-hand.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">What exactly does Pro unlock?</div>
+        <div class="faq-q">What does Pro unlock?</div>
         <div class="faq-a">Pro removes the daily practice limit and opens the full postflop experience in the Live Advisor: real-time Win%, board texture analysis, street-by-street GTO advice, opponent profiling and street plan coaching on every hand.</div>
       </div>
       <div class="faq-item">
@@ -571,7 +555,7 @@ footer{
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════ FOOTER -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div>
@@ -580,10 +564,7 @@ footer{
     </div>
     <a href="https://apps.apple.com/gb/app/poker-edge/id6761439439" class="appstore-badge">
       <span class="badge-apple">🍎</span>
-      <span>
-        <span class="badge-top">Download on the</span>
-        <span class="badge-main">App Store</span>
-      </span>
+      <span><span class="badge-top">Download on the</span><span class="badge-main">App Store</span></span>
     </a>
     <div class="footer-links">
       <a href="https://neilallen94.github.io/poker-edge/privacy-policy">Privacy</a>
